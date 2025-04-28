@@ -60,13 +60,11 @@ bar_fig = px.bar(
     barmode="group",
     title="Contagem de Resumos por Mês",
     text_auto=True,
-    template="plotly_white"
 )
 bar_fig.update_layout(
     xaxis_title="Mês",
     yaxis_title="Quantidade",
     legend_title="Bloqueios",
-    template="plotly_white" 
 )
 st.plotly_chart(bar_fig, use_container_width=True)
 
@@ -84,7 +82,6 @@ pie_fig = px.pie(
     names="Bloqueios",
     values="Quantidade",
     title=f"Distribuição Percentual por Categoria - {mes_selecionado}",
-    template="plotly_white"
 )
-pie_fig.update_layout(template="plotly_white")
 st.plotly_chart(pie_fig, use_container_width=True)
+st.text("Última atualização: 28/04/2025")
