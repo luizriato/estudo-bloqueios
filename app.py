@@ -93,4 +93,4 @@ pie_fig = px.pie(
 pie_fig.update_traces(textinfo='percent')
 st.plotly_chart(pie_fig, use_container_width=True)
 
-st.text("Última atualização: 28/04/2025")
+st.text("Última atualização: 28/04/2025") 
