@@ -72,13 +72,20 @@ bar_fig.update_layout(
 )
 st.plotly_chart(bar_fig, use_container_width=True)
 
+# Adicionar seletor de mês
+mes_selecionado = st.selectbox("Selecione o mês para o gráfico de pizza:", ["Jan", "Fev", "Mar", "Abr", "Total Geral"])
+
+# Filtrar dados para o mês selecionado
+df_mes = df[["Bloqueios", mes_selecionado]].copy()
+df_mes.columns = ["Bloqueios", "Quantidade"]
+
 # Gráfico de Pizza
-st.subheader("Distribuição Total por Categoria")
+st.subheader(f"Distribuição Total por Categoria - {mes_selecionado}")
 pie_fig = px.pie(
-    df,
+    df_mes,
     names="Bloqueios",
-    values="Total Geral",
-    title="Distribuição Percentual por Categoria",
+    values="Quantidade",
+    title=f"Distribuição Percentual por Categoria - {mes_selecionado}",
     template="plotly_white"
 )
 pie_fig.update_layout(template="plotly_white")  # Forçando o tema aqui também
