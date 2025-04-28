@@ -13,12 +13,11 @@ st.set_page_config(
 @st.cache_data
 def load_data():
     df_raw = pd.read_excel("estudo bloqueios py.xlsx", sheet_name="tabela", header=None)
-    df = df_raw.iloc[1:16, 0:7]  # 7 colunas corretas
+    df = df_raw.iloc[1:15, 0:7] 
     df.columns = ["Bloqueios", "Jan", "Fev", "Mar", "Abr", "Total Geral", "Porcentagem"]
     df.reset_index(drop=True, inplace=True)
     
     df["Total Geral"] = pd.to_numeric(df["Total Geral"], errors="coerce")
-    df["Porcentagem"] = pd.to_numeric(df["Porcentagem"], errors="coerce")
     df["Porcentagem"] = (df["Porcentagem"] / 1).apply(lambda x: f"{x:.2%}")
     return df
 
@@ -36,7 +35,7 @@ with col1:
     """, unsafe_allow_html=True)
 
 with col3:
-    st.image("claro_logo.png", width=80)  # <-- usando sua imagem local
+    st.image("claro_logo.png", width=80) 
 
 st.markdown("<hr style='border: 2px solid red;'>", unsafe_allow_html=True)
 
@@ -52,7 +51,6 @@ df_long = df.melt(
     value_name="Quantidade"
 )
 
-# Gráfico de Barras
 st.subheader("Contagem por Categoria e Mês")
 bar_fig = px.bar(
     df_long,
@@ -68,7 +66,7 @@ bar_fig.update_layout(
     xaxis_title="Mês",
     yaxis_title="Quantidade",
     legend_title="Bloqueios",
-    template="plotly_white"  # Forçando o tema aqui também
+    template="plotly_white" 
 )
 st.plotly_chart(bar_fig, use_container_width=True)
 
@@ -88,5 +86,5 @@ pie_fig = px.pie(
     title=f"Distribuição Percentual por Categoria - {mes_selecionado}",
     template="plotly_white"
 )
-pie_fig.update_layout(template="plotly_white")  # Forçando o tema aqui também
+pie_fig.update_layout(template="plotly_white")
 st.plotly_chart(pie_fig, use_container_width=True)
