@@ -13,8 +13,8 @@ st.set_page_config(
 @st.cache_data
 def load_data():
  df_raw = pd.read_excel("estudo bloqueios py.xlsx", sheet_name="tabela", header=None)
- df = df_raw.iloc[1:15, 0:7]
- df.columns = ["Bloqueios", "Jan", "Fev", "Mar", "Abr", "Total Geral", "Porcentagem"]
+ df = df_raw.iloc[1:15, 0:8]
+ df.columns = ["Bloqueios", "Jan", "Fev", "Mar", "Abr", "Mai", "Total Geral", "Porcentagem"]
  df.reset_index(drop=True, inplace=True)
  
  df["Total Geral"] = pd.to_numeric(df["Total Geral"], errors="coerce")
@@ -42,8 +42,8 @@ st.markdown("<hr style='border: 2px solid red;'>", unsafe_allow_html=True)
 # Seleção de meses
 meses_selecionados = st.multiselect(
  "Selecione os meses para visualizar os dados:",
- options=["Jan", "Fev", "Mar", "Abr", "Total Geral"],
- default=["Jan", "Fev", "Mar", "Abr"]
+ options=["Jan", "Fev", "Mar", "Abr", "Mai", "Total Geral"],
+ default=["Jan", "Fev", "Mar", "Abr", "Mai"]
 )
 
 # Filtrar dados para os meses selecionados
@@ -93,4 +93,4 @@ pie_fig = px.pie(
 pie_fig.update_traces(textinfo='percent')
 st.plotly_chart(pie_fig, use_container_width=True)
 
-st.text("Última atualização: 28/04/2025")
+st.text("Última atualização: 13/05/2025")
